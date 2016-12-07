@@ -2,7 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { DatePipe } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
-import { NgModule } from "@angular/core";
+import {NgModule, LOCALE_ID} from "@angular/core";
 
 import { ConfirmDialogModule, ConfirmationService } from "primeng/primeng";
 
@@ -41,6 +41,7 @@ import { FromNowPipe } from "./pipes/from-now.pipe";
         UserProfileComponent
     ],
     providers: [
+        {provide: LOCALE_ID, useValue: 'es-ES'},
         BackendUriProvider,
         CategoryService,
         ConfirmationService,

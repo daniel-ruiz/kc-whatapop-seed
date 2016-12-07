@@ -17,18 +17,10 @@
         <p [innerHtml]="_product.description"></p>
         <user-profile [userId]="_product.seller.id"></user-profile>
 
-        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-        | Purple Path                                                      |
-        |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-        | Aplica el siguiente formato al precio del producto:              |
-        |   - 1 dígito mínimo (parte entera)                               |
-        |   - 2 dígitos mínimo y máximo (parte decimal)                    |
-        |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
         <button
             *ngIf="_product.state === 'selling'"
             (click)="showPurchaseWarning()"
-            class="button large expanded">Comprar por {{ _product.price }} €</button>
+            class="button large expanded">Comprar por {{ _product.price | currency:'EUR':true:'1.2-2' }}</button>
         <button
             (click)="goBack()"
             class="warning button expanded">Volver</button>
