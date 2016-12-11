@@ -17,19 +17,6 @@ export class ProductService {
     getProducts(filter: ProductFilter = undefined): Observable<Product[]> {
 
         /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-        | Pink Path                                                        |
-        |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-        | Pide al servidor que te retorne los productos ordenados de más   |
-        | reciente a menos, teniendo en cuenta su fecha de publicación.    |
-        |                                                                  |
-        | En la documentación de 'JSON Server' tienes detallado cómo hacer |
-        | la ordenación de los datos en tus peticiones, pero te ayudo      |
-        | igualmente. La querystring debe tener estos parámetros:          |
-        |                                                                  |
-        |   _sort=publishedDate&_order=DESC                                |
-        |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-        /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
         | Red Path                                                         |
         |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
         | Pide al servidor que te retorne los productos filtrados por      |
@@ -59,8 +46,12 @@ export class ProductService {
         |       state=x (siendo x el estado)                               |
         |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('_sort', 'publishedDate');
+        params.set('_order', 'DESC');
+
         return this._http
-                   .get(`${this._backendUri}/products`)
+                   .get(`${this._backendUri}/products`, {search: params})
                    .map((data: Response): Product[] => Product.fromJsonToList(data.json()));
     }
 
