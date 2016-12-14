@@ -4,3 +4,21 @@
     padding-top: 28px;
     margin-bottom: 20px;
 }
+
+#categoryLabel {
+    vertical-align: top;
+}
+
+.like-active {
+    vertical-align: top;
+    color: red;
+}
+
+.like-inactive {
+    vertical-align: top;
+    color: darkgrey;
+}
+
+.like-inactive:hover, .like-active:hover {
+    cursor: pointer;
+}

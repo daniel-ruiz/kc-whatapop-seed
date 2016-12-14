@@ -5,7 +5,7 @@
     <div class="medium-8 columns">
         <h3>{{ _product.name }}</h3>
         <p>
-            <span class="label" [ngClass]="{
+            <span id="categoryLabel" class="label" [ngClass]="{
                 'info': _product.category.id === 1,
                 'alert': _product.category.id === 2,
                 'warning': _product.category.id === 3 }">
@@ -13,6 +13,14 @@
             </span>
 
             <span>Publicado {{ _product.publishedDate | fromNow }}</span>
+            <span>
+                <i class="material-icons"
+                   [class.like-active]="_likedByUser"
+                   [class.like-inactive]="!_likedByUser"
+                   (click)="toggleLike()" >
+                    {{ _likedByUser ? 'favorite' : 'favorite_border' }}
+                </i>
+            </span>
         </p>
         <p [innerHtml]="_product.description"></p>
         <user-profile [userId]="_product.seller.id"></user-profile>

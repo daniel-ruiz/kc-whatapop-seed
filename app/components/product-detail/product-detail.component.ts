@@ -6,6 +6,7 @@ import { ConfirmationService } from "primeng/primeng";
 
 import { Product } from "../../models/product";
 import { ProductService } from "../../services/product.service";
+import getPrototypeOf = Reflect.getPrototypeOf;
 
 @Component({
     templateUrl: "./app/components/product-detail/product-detail.component.html",
@@ -13,8 +14,11 @@ import { ProductService } from "../../services/product.service";
 })
 export class ProductDetailComponent implements OnDestroy, OnInit {
 
+    private _productLikeStorageKey: string;
+
     private _product: Product;
     private _productSubscription: Subscription;
+    private _likedByUser: boolean = false;
 
     constructor(
         private _productService: ProductService,
@@ -23,7 +27,11 @@ export class ProductDetailComponent implements OnDestroy, OnInit {
         private _confirmationService: ConfirmationService) { }
 
     ngOnInit(): void {
-        this._route.data.forEach((data: { product: Product }) => this._product = data.product);
+        this._route.data.forEach((data: { product: Product }) => {
+            this._product = data.product;
+            this._productLikeStorageKey = `whatapop-likes-product-${this._product.id}`;
+            this._likedByUser = this._fetchProductLike();
+        });
         window.scrollTo(0, 0);
     }
 
@@ -60,5 +68,24 @@ export class ProductDetailComponent implements OnDestroy, OnInit {
 
     goBack(): void {
         window.history.back();
+    }
+
+    toggleLike(): void {
+        this._likedByUser = !this._likedByUser;
+        this._setProductLike(this._likedByUser);
+    }
+
+    private _fetchProductLike(): boolean {
+        if (typeof(Storage) !== undefined) {
+            return localStorage.getItem(this._productLikeStorageKey) === "true";
+        } else {
+            return false;
+        }
+    }
+
+    private _setProductLike(like: boolean): void {
+        if (typeof(Storage) !== undefined) {
+            localStorage.setItem(this._productLikeStorageKey, (like ? "true" : "false"));
+        }
     }
 }
