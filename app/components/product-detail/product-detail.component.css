@@ -14,9 +14,17 @@
     color: red;
 }
 
+.like-active::before {
+    content: "favorite";
+}
+
 .like-inactive {
     vertical-align: top;
     color: darkgrey;
+}
+
+.like-inactive::before {
+    content: "favorite_border";
 }
 
 .like-inactive:hover, .like-active:hover {
