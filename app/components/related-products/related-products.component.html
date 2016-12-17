@@ -1,0 +1,13 @@
+<div *ngIf="_relatedProducts?.length > 0" class="row">
+    <div class="12 columns">
+        <h4><strong>{{_user?.name}}</strong> también está vendiendo</h4>
+        <div class="small-up-1 medium-up-2 large-up-4">
+            <product
+                *ngFor="let relatedProduct of _relatedProducts"
+                [data]="relatedProduct"
+                class="column"
+                (productClicked)="showProductDetails($event)">
+            </product>
+        </div>
+    </div>
+</div>

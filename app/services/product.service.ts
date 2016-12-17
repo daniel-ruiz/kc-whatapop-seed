@@ -24,6 +24,7 @@ export class ProductService {
             params.set('q', filter.text);
             params.set('category.id', filter.category);
             params.set('state', filter.state);
+            params.set('seller.nick', filter.seller);
         }
 
         return this._http

@@ -67,7 +67,7 @@ export class ProductDetailComponent implements OnDestroy, OnInit {
     }
 
     goBack(): void {
-        window.history.back();
+        this._router.navigate(['products']);
     }
 
     toggleLike(): void {

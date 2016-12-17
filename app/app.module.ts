@@ -2,7 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { DatePipe } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
-import {NgModule, LOCALE_ID} from "@angular/core";
+import { NgModule, LOCALE_ID } from "@angular/core";
 
 import { ConfirmDialogModule, ConfirmationService } from "primeng/primeng";
 
@@ -21,6 +21,7 @@ import { SoldProductsResolve } from "./services/sold-products-resolve.service";
 import { UserProfileComponent } from "./components/user-profile/user-profile.component";
 import { UserService } from "./services/user.service";
 import { FromNowPipe } from "./pipes/from-now.pipe";
+import { RelatedProductsComponent } from "./components/related-products/related-products.component";
 
 @NgModule({
     imports: [
@@ -38,6 +39,7 @@ import { FromNowPipe } from "./pipes/from-now.pipe";
         ProductFilterComponent,
         ProductResetComponent,
         ProductsCollectionComponent,
+        RelatedProductsComponent,
         UserProfileComponent
     ],
     providers: [

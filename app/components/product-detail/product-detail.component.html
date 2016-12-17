@@ -31,6 +31,12 @@
         <button
             (click)="goBack()"
             class="warning button expanded">Volver</button>
+        <br>
+        <aside>
+            <related-products
+                [mainProduct]="_product">
+            </related-products>
+        </aside>
     </div>
     <p-confirmDialog header="Confirmación de compra" width="625" #cd></p-confirmDialog>
 </div>
