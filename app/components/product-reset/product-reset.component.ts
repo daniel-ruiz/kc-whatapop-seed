@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { Subject } from "rxjs/Subject";
 import "rxjs/add/operator/switchMap";
 
@@ -17,7 +17,9 @@ export class ProductResetComponent implements OnDestroy, OnInit {
 
     constructor(
         private _productService: ProductService,
-        private _route: ActivatedRoute) { }
+        private _route: ActivatedRoute,
+        private _router: Router
+    ) { }
 
     ngOnInit(): void {
         this._productStream$
@@ -37,5 +39,9 @@ export class ProductResetComponent implements OnDestroy, OnInit {
 
     setProductAvailable(productId: number): void {
         this._productStream$.next(productId);
+    }
+
+    goBack(): void {
+        this._router.navigate(['products']);
     }
 }
